@@ -117,7 +117,7 @@ func (t *taskRepo) List(l pb.ListReq) (pb.ListResp, error) {
 		}
 		list.Tasks = append(list.Tasks, &task)
 	}
-	err = t.db.QueryRow(`select count(*) from tasks`).Scan(&list.Count)
+	err = t.db.QueryRow(`SELECT COUNT(*) FROM tasks WHERE deleted_at IS NULL`).Scan(&list.Count)
 	if err != nil {
 		return pb.ListResp{}, err
 	}
