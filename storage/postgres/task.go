@@ -185,7 +185,7 @@ func (t *taskRepo) ListOverdue(l pb.ListOverReq) (pb.ListOverResp, error) {
 			updated_at
 		FROM tasks
 		WHERE deadline > $1
-		AND deleted_at = NULL
+		AND deleted_at IS NULL
 		LIMIT $2
 		OFFSET $3`,
 		duration,
